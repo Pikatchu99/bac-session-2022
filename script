@@ -28,10 +28,10 @@ def get_result():
             if table_nbr.lower() == "end":
                 print("Good bye!!!")
                 break
-            url = API_LINKS + "/51/session/"+ table_nbr
+            url = API_LINKS + "/50/session/"+ table_nbr
             request = requests.get(url)
             if request.status_code != 200:
-                print("Something went wrong. Please retry.")
+                print("{} Something went wrong. Please retry.".format(request.status_code))
             else:
                 result = request.json()
                 display_result(result)
