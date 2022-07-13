@@ -11,10 +11,7 @@ def display_result(result):
     print("School: "+str(result["school"]))
     print("Serie: "+str(result["serie"]))
     print("Departement: "+str(result["departement"]))
-    if str(result["verdict"]) == "NULL":
-        print("Verdict: NOT ADMISSIBLE\n")
-    else:
-        print("Verdict: "+str(result["verdict"])+"\n")
+    print("Verdict: "+str(result["verdict"])+"\n")
     return
 
 def get_result():
