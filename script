@@ -1,0 +1,50 @@
+#!/usr/bin/env python3
+#Request to get BAC result BENIN 2022 session
+# Version: V1
+
+API_LINKS = "https://api.eresultats.bj/api/candidates/search"
+
+import requests
+def display_result(result):
+    print("LastName: "+ str(result["lastname"]))
+    print("FirstName: "+ str(result["firstname"]))
+    print("School: "+str(result["school"]))
+    print("Serie: "+str(result["serie"]))
+    print("Departement: "+str(result["departement"]))
+    if str(result["verdict"]) == "NULL":
+        print("Verdict: NOT ADMISSIBLE\n")
+    else:
+        print("Verdict: "+str(result["verdict"])+"\n")
+    return
+
+def get_result():
+    print("############################### Welcome ###############################")
+    print("Enter your table numbet to get your results. ")
+    print("Enter end to finish session.")
+    print("#######################################################################\n")
+    try:
+        table_nbr = input("Table number: ")
+        while True:
+            if table_nbr.lower() == "end":
+                print("Good bye!!!")
+                break
+            url = API_LINKS + "/51/session/"+ table_nbr
+            request = requests.get(url)
+            if request.status_code != 200:
+                print("Something went wrong. Please retry.")
+            else:
+                result = request.json()
+                display_result(result)
+            table_nbr = input("Table number: ")
+    except EOFError as err:
+        print("\nGood bye!!!")
+        return
+    except KeyError as err:
+        print("Something went wrong. Please retry")
+        return
+    except Exception as err:
+        print("Something went wrong. Please retry")
+        return
+
+
+get_result()
